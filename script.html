@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title></title>
+</head>
+<style type="text/css">
+	* {font-family: 'Segoe UI';}
+th {text-align: left; font-weight: 600;}
+table {border-collapse: collapse; border: 1px solid #999; width: 100%;}
+table td,
+table th {border: 1px solid #ccc;}
+table input {max-width: 100%; border: 1px solid #ccc;}
+table td:first-child input {width: 50px;}
+#master {display: none;}
+</style>
+<body>
+
+<table>
+  <thead>
+    <tr>
+      <th>Sl No</th>  
+      <th>Item Name</th>
+      <th>Quantity</th>
+      <th>Rate</th>
+      <th>Total Price</th>
+      <th></th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr id="master">
+      <td><input type="text" class="Sl" /></td>
+      <td><input type="text" class="Product" name="item_name[]" /></td>
+      <td><input type="text" class="Quantity" name="quantity[]" /></td>
+      <td><input type="text" class="Rate" name="price[]" /></td>
+      <td><input type="text" class="Amount" name="total_price[]" /></td>
+      <td><input type="button" value="&times;" class="del" /></td>
+    </tr>
+  </tbody>
+  <tfoot>
+    <tr>
+      <th colspan="2">Total</th>
+      <th><span id="total_qty">0</span> Items</th>
+      <th></th>
+      <th><span id="total_amt">0</span> RS.</th>
+      <th></th>
+    </tr>
+  </tfoot>
+</table>
+<input type="button" value="Add New" id="add" />
+<script src="https://code.jquery.com/jquery-2.1.4.js"></script>
+<script type="text/javascript">
+	$(function () {
+  $("#add").click(function () {
+    $("#master").clone().removeAttr("id").appendTo("tbody");
+  });
+  $("table").on("click", ".del", function () {
+    $(this).closest("tr").remove();
+  });
+  $("table").on("input", "input", function () {
+    $("tbody tr").each(function () {
+      $this = $(this);
+      if (this.id != "master")
+        $this.find(".Amount").val(+$this.find(".Quantity").val() * +$(this).find(".Rate").val());
+      $("#total_amt, #total_qty").text(0);
+
+      $(".Amount").each(function () {
+        if (this.value != "")
+          $("#total_amt").text(parseInt($("#total_amt").text()) + parseInt($(this).val()));
+      });
+
+      $(".Quantity").each(function () {
+        if (this.value != "")
+          $("#total_qty").text(parseInt($("#total_qty").text()) + parseInt($(this).val()));
+      });
+    });
+  });
+});
+</script>
+</body>
+</html>

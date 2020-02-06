@@ -1,0 +1,189 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title></title>
+</head>
+<style type="text/css">
+	* {font-family: 'Segoe UI';}
+th {text-align: left; font-weight: 600;}
+table {border-collapse: collapse; border: 1px solid #999; width: 100%;}
+table td,
+table th {border: 1px solid #ccc;}
+table input {max-width: 100%; border: 1px solid #ccc;}
+table td:first-child input {width: 50px;}
+#master {display: none;}
+</style>
+<body>
+<section class="content-header">
+      <h1>Sell Item</h1>
+</section>
+<p class="login-box-msg"></p>
+    <!-- Main content -->
+    <section class="content">
+      <div class="row">
+         <div class="col-md-12">
+          <!-- general form elements -->
+          <div class="box box-primary">
+            <div class="box-header with-border">
+              <h3 class="box-title">Sell Item</h3>
+            </div>
+            <form method="POST" action="{{ route('sell.store') }}"  enctype="multipart/form-data">
+             {{ csrf_field() }}
+               @method('POST')
+                <div class="box-body">
+             
+              <input type="hidden" name="date" value="<?php echo(date('jS \of F Y')); ?>">
+              <table>
+  <thead>
+    <tr>
+      <th>Sl No</th>
+      <th>Item Name</th>
+      <th>Quantity</th>
+      <th>Rate</th>
+      <th>Total Price</th>
+      <th></th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr id="master">
+      <td><input type="text" class="Sl" /></td>
+      <td><input type="text" class="Product" name="item_name[]" /></td>
+      <td><input type="text" class="Quantity" name="quantity[]" /></td>
+      <td><input type="text" class="Rate" name="price[]" /></td>
+      <td><input type="text" class="Amount" name="total_price[]" /></td>
+      <td><input type="button" value="&times;" class="del btn btn-danger" /></td>
+    </tr>
+  </tbody>
+  <tfoot>
+    <tr>
+      <th>
+                          
+       <label>Adjustment</label>
+       <input type="checkbox" id="myCheck" name="check" value="1"  onclick="myFunction()" >
+    </th>
+    <th>
+       <textarea name="adjustment_remark"  id="text" style="display:none"></textarea>
+    </th>
+      <th colspan="2">Total</th>
+      <th><span id="total_qty">0</span> Items</th>
+
+      
+      <th><input type="text" name="net_amount" id="total_amt">RS.</th>
+      
+    </tr>
+  </tfoot>
+</table>
+<input type="button" value="Add New" id="add" />
+             </form>
+          </div>
+        </div>
+      </div>
+    </section>
+
+<script src="https://code.jquery.com/jquery-2.1.4.js"></script>
+<script type="text/javascript">
+	$(function () {
+  $("#add").click(function () {
+    $("#master").clone().removeAttr("id").appendTo("tbody");
+  });
+  $("table").on("click", ".del", function () {
+    $(this).closest("tr").remove();
+  });
+  $("table").on("input", "input", function () {
+    $("tbody tr").each(function () {
+      $this = $(this);
+      if (this.id != "master")
+        $this.find(".Amount").val(+$this.find(".Quantity").val() * +$(this).find(".Rate").val());
+      $("#total_amt, #total_qty").val(0);
+
+      $(".Amount").each(function () {
+        if (this.value != "")
+          $("#total_amt").val(parseInt($("#total_amt").val()) + parseInt($(this).val()));
+      });
+
+      $(".Quantity").each(function () {
+        if (this.value != "")
+          $("#total_qty").text(parseInt($("#total_qty").text()) + parseInt($(this).val()));
+      });
+    });
+  });
+});
+  //cHECKBOX CHECKED
+   function myFunction()
+{
+var checkBox = document.getElementById("myCheck");
+var text = document.getElementById("text");
+if (checkBox.checked == true)
+{
+    text.style.display = "block";
+} 
+else
+{
+     text.style.display = "none";
+}
+
+}  
+</script>
+</body>
+</html>
+
+
+<script
+  src="https://code.jquery.com/jquery-3.4.1.min.js"
+  integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo="
+  crossorigin="anonymous"></script>
+<script type="text/javascript">
+  
+
+
+$('.newproductPrice').change(function() { 
+ var TableData = new Array();
+
+$('.newproductPrice').each(function (row, tr) {
+    var mytable = document.getElementById('mytable');
+  var myinput = document.getElementById('myentry');
+  var row_total =  myinput.value;
+  TableData.push(row_total);
+})
+// TableData.shift();   
+
+var res = TableData.map(Number);
+
+console.log(TableData);
+
+var total = 0;
+for (var i = 0; i < TableData.length; i++) {
+    total = res.reduce((a, b) => a + b, 0); 
+}
+$(".netamount").val(total);
+});
+
+ var max = 2;
+  $(".add-row").click(function()
+  {
+  var markup = '<tr><td><input type="checkbox" name="record"></td><td><input name="item_name[]" class="form-control" placeholder="Iteam Name" type="text" id="mastersIteamName"></td><td><input name="quantity[]" class="form-control newquantity" placeholder="Quantity" type="text" id="mastersQuantity"></td><td><input name="price[]" class="form-control newrate" placeholder="Rate" type="text" id="mastersRate"></td><td><input name="total_price[]" class="newproductPrice" placeholder="Tatal Price" type="text" id="myentry"></td></tr>';
+    max++;
+    $("table tbody").append(markup);
+  });
+
+
+
+
+
+  // var TableData = new Array();
+
+  //                   $('#billTable tr').each(function (row, tr) {
+  //                       TableData[row] = {
+  //                           "SrNo": $(tr).find('td:eq(0)').text()
+  //                           , "Barcode": $(tr).find('.barcodeEvent').val()
+  //                           , "Productname": $(tr).find('.nameEvent').val()
+  //                            , "HsnSca": $(tr).find('.HsnEvent').val()
+  //                            , "Sellingprice": $(tr).find('.sellingEvent').val()
+  //                            , "taxtype": $(tr).find('.TaxEvent').val()
+  //                            , "rate": $(tr).find('.rateEvent').val()
+  //                                , "ProductAmt": $(tr).find('.totalAmountEvent').val()
+  //                       }
+  //                   });
+
+</script>
+<script src="{{ asset('customAssets/js/script.js') }}"></script>

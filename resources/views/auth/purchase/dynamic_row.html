@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title></title>
+</head>
+<body>
+<div class="form-group table-responsive">
+                  <table id="myTable" class="table table-condensed-xs">
+                    <thead>
+                    <tr>
+                      <th>#</th>
+                      <th>Item Name</th>
+                      <th>Quantity</th>
+                      <th>Rate</th>
+                      <th>Total Price</th>
+                    </tr>
+                    </thead>
+
+                    <tbody class="add_new_field">
+                      <?php for($i = 1; $i <= 1; $i++){ ?>
+                        
+                      <tr>
+                        <td>
+                          &nbsp;
+                        </td>
+                   
+                        <td>  
+                          <div class="form-group">
+                            
+                            <div class="input text">
+                              <input name="item_name[]" class="form-control" placeholder="Item Name" type="text" >
+                            </div>             
+                         </div>
+                    </td>
+                       <td>   
+                          <div class="form-group">
+                          
+                            <div class="input text">
+                              <input name="quantity[]" class="form-control newquantity" placeholder="Quantity" type="text" >
+                            </div>             
+                          </div>
+                         </td>
+                      <td>   
+                         <div class="form-group">
+                        
+                           <div class="input text">
+                            <input name="price[]" class="form-control newrate" placeholder="Rate" type="text" >
+                           </div>             
+                          </div>
+                       </td>
+                     <td>   
+                  <div class="form-group">
+              
+                  <div class="input text">
+                    <input name="total_price[]" class="form-control newproductPrice" placeholder="Total Price" type="text" id="myentry" >
+                  </div>             
+                </div>
+                </td>
+                         
+                      </tr>
+                    <?php } ?>
+                    </tbody>
+                    <tfoot>
+                      <tr>
+                        <td>
+                          &nbsp;
+                        </td>
+                        <td>
+                          &nbsp;
+                        </td>
+                        <td>
+                           <input name="net_amount" class="form-control netamount " placeholder="Grand Total" type="text" id="totalAmount" value="">
+                             
+                        
+                        </td>
+                        <td>
+                            <input name="paid_amount" class="form-control " placeholder="Paid Amount" type="text" id="PaidAmount">
+                        </td>
+                        <td>
+                            <input name="remaining_amount" class="form-control " placeholder="Remaining Amount" type="text" id="paindingAmount" >
+                        </td>
+                        <input type="hidden" name="status" value="<?php if($_POST['remaining_amount']==0)
+                        {
+                          echo('COMPLETE');
+                        }
+                        else{ echo('Pending'); } ?>">
+                      </tr>
+                    </tfoot>
+                  </table>
+
+                  <input type="button" class="btn  btn-info add-row" value="Add Row" id="addrow">
+                  <button type="button" class="btn  btn-danger delete-row">Delete Row</button>
+                </div>
+<script>
+	var max = 2;
+  $(".add-row").click(function()
+  {
+  var markup = '<tr><td><input type="checkbox" name="record"></td><td><input name="item_name[]" class="form-control" placeholder="Iteam Name" type="text" id="mastersIteamName"></td><td><input name="quantity[]" class="form-control newquantity" placeholder="Quantity" type="text" id="mastersQuantity"></td><td><input name="price[]" class="form-control newrate" placeholder="Rate" type="text" id="mastersRate"></td><td><input name="total_price[]" class="form-control newproductPrice" placeholder="Tatal Price" type="text" id="myentry"></td></tr>';
+    max++;
+    $("table tbody").append(markup);
+  });
+
+</script>
+</body>
+</html>
