@@ -51,20 +51,20 @@
                       </div>              
                     </div>
                     <p style="color:red">@error('email') {{$message}} @enderror</p>
-                    <div class="form-group">
+                   <!--  <div class="form-group">
                       <label>Username</label>
                       <div class="input text">
                         <input name="username" class="form-control" placeholder="username"  maxlength="255" type="text"  value="{{ $viewuser->username }} " />
                       </div>               
                     </div>
-                    <p style="color:red">@error('username') {{$message}} @enderror</p>
-                    <div class="form-group">
+                    <p style="color:red">@error('username') {{$message}} @enderror</p> -->
+                   <!--  <div class="form-group">
                       <label>Password</label>
                       <div class="input text">
                         <input name="password" class="form-control" placeholder="******"  maxlength="255" type="password"  value="{{ $viewuser->password }}   "/>
                       </div>               
                     </div>
-                    <p style="color:red">@error('password') {{$message}} @enderror</p>
+                    <p style="color:red">@error('password') {{$message}} @enderror</p> -->
                     <div class="form-group">
                       <label>User Role</label>
                         <div class="input select">

@@ -27,8 +27,6 @@ class UpdateUserRequest extends FormRequest
              'branch_name' => 'required|string| max:100 ',
             'name' => 'required|string',
             'email' => 'required|string',
-            'username' => 'required|string',
-            'password' => 'required|string',
             'role' => 'required|string'
            
            

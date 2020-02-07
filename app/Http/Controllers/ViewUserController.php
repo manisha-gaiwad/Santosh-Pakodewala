@@ -90,7 +90,7 @@ class ViewUserController extends Controller
     {
        
         
-    $data = $request->only(['branch_name', 'name',  'email', 'username', 'password', 'role']);
+    $data = $request->only(['branch_name', 'name',  'email','role']);
         //  if ($request->hasFile('image'))
         // {
         //     $file = $this->StoreFile($request);

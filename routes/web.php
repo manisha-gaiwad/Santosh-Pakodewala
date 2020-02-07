@@ -29,7 +29,28 @@ Auth::routes(['register' => false]);
 
 Route::middleware(['auth'])->group(function(){
 
-Route::get('/home', 'HomeController@index')->name('home');
+Route::any('/search', 'ExpensesController@search')->name('search');
+// Route::get('/search', function() {
+//     $model = App\Expenses::query();
+
+//     return DataTables::eloquent($model)
+//                 ->filter(function ($query) {
+//                     if (request()->has('date')) {
+//                         $query->where('date', 'like', "%" . request('from_date') . "%");
+//                     }
+
+//                     if (request()->has('date')) {
+//                         $query->where('date', 'like', "%" . request('to_date') . "%");
+//                     }
+//                 })
+//                 ->toJson();
+//             });
+
+Route::any('/home', 'HomeController@index')->name('home');
+Route::any('/updateuser/{id}','HomeController@updateuser');
+Route::post('/changePassword','HomeController@changePassword')->name('changePassword');
+
+Route::get('/profile','HomeController@showChangePasswordForm');
 Route::any('sellitem/item', 'SellController@item');
 Route::any('ViewUser/restore/{id}', 'ViewUserController@restore');
 Route::any('invoice/restore/{id}', 'InvoiceController@restore');
@@ -57,7 +78,8 @@ Route::resources([
     'attee' => 'AttendanceController',
     'invoice' => 'InvoiceController',
     'expenses' => 'ExpensesController',
-    'sell' => 'SellController'
+    'sell' => 'SellController',
+     // 'profile' => 'ProfileController'
     
 ]);
  // Route::resource('sell', 'SellController');

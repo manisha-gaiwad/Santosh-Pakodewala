@@ -35,7 +35,7 @@
                                <p style="margin-bottom: 10px;">Member Since 2019-<?php echo date("Y");?></p>
                                <div>
                                   <div class="pull-right">
-                                    <a href="" class="user-logout">Profile</a>
+                                    <a href="/profile" class="user-logout">Profile</a>
                                   </div>
                                    <div class="pull-left ">
                                        <a href="{{ route('logout') }}" class="user-logout" onclick="event.preventDefault();document.getElementById('logout-form').submit();"><i class="icon-key"></i>

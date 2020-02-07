@@ -22,7 +22,7 @@
    @yield('content')
   </div>
   <!-- /.content-wrapper -->
-  <footer class="main-footer">
+  <footer class="main-footer" style="margin-top: 35px;">
     <strong>Copyright &copy; 2019-<?php date("Y"); ?> <a href="http://hastensolutions.in/">Hasten Solutions</a>.</strong>
     All rights reserved.
     

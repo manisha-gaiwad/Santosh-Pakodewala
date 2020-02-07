@@ -134,6 +134,25 @@ class ExpensesController extends Controller
         }
 
     }
+    function search(Request $request)
+    {
+     if(request()->ajax())
+     {
+      if(!empty($request->from_date))
+      {
+       $data = DB::table('expenses')
+         ->whereBetween('date', array($request->from_date, $request->to_date))
+         ->get();
+      }
+      else
+      {
+       $data = DB::table('tbl_order')
+         ->get();
+      }
+      return datatables()->of($data)->make(true);
+     }
+     return view('daterange');
+    }
 
 
 }
